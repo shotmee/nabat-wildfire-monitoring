@@ -1,0 +1,15 @@
+{
+  "strategy": "refiner",
+  "refiner_alpha": 1.0,
+  "burn_threshold": 0.8,
+  "severity_weights": [
+    1.35,
+    1.15,
+    0.9
+  ],
+  "min_blob_size": 20,
+  "use_tta": true,
+  "score_val": 0.4518625533031872,
+  "iou_burn_val": 0.7132306020538197,
+  "miou_sev_val": 0.6741061419478344
+}

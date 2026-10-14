@@ -1,0 +1,26 @@
+{
+  "n_models": 1,
+  "in_ch": 20,
+  "feature_names": [
+    "dNBR",
+    "dNBR_rank",
+    "dNBR_z",
+    "dNBR_std5",
+    "NBR_pre",
+    "NBR_post",
+    "dNDVI",
+    "NDVI_post",
+    "dNDMI",
+    "dMIRBI",
+    "dVV",
+    "dVH",
+    "dem",
+    "slope",
+    "landcover",
+    "cloud_mask"
+  ],
+  "epochs": 30,
+  "crop": 256,
+  "pretrained_encoder": true,
+  "seed": 42
+}

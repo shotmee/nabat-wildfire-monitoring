@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1b1310">
+<title>НАБАТ — мониторинг пожаров · Майнкрафт Кульбит</title>
+<link rel="icon" type="image/svg+xml" href="/static/vendor/fire-icon.svg">
+<link rel="stylesheet" href="/static/vendor/leaflet.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="panel">
+    <header class="panel__head">
+      <div class="embers" aria-hidden="true"></div>
+      <div class="title-row">
+        <img class="logo-icon" src="/static/vendor/fire-icon.svg" alt="">
+        <div>
+          <h1 class="wordmark">НАБАТ</h1>
+          <div class="tagline">мониторинг природных пожаров</div>
+        </div>
+      </div>
+      <p class="sub">VIIRS · Sentinel-2 · Sentinel-1 — термоточки, контуры гари и площади по степеням поражения</p>
+      <div id="source-badge" class="badge badge--wait">источник: загрузка…</div>
+
+      <div class="team-strip">
+        <div class="team-strip__name">🎮 команда «майнкрафт кульбит»</div>
+        <div class="team-strip__members">
+          <span class="tag tag--1"><i></i>Недозорова А.</span>
+          <span class="tag tag--2"><i></i>Сабашнюк М.</span>
+          <span class="tag tag--3"><i></i>Колпакова Д.</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="block">
+      <h2>🗺️ 1. Территория</h2>
+      <div class="row">
+        <button id="btn-view" class="btn btn--ghost" type="button">🗺️ Текущий вид</button>
+        <button id="btn-draw" class="btn btn--ghost" type="button">✏️ Выделить рамкой</button>
+      </div>
+      <label class="field">
+        <span>bbox (min_lon, min_lat, max_lon, max_lat)</span>
+        <input id="bbox" type="text" spellcheck="false" autocomplete="off">
+      </label>
+      <p class="hint" id="coverage-hint"></p>
+    </section>
+
+    <section class="block">
+      <h2>📅 2. Период</h2>
+      <div class="row">
+        <label class="field field--half"><span>с</span><input id="date-from" type="date"></label>
+        <label class="field field--half"><span>по</span><input id="date-to" type="date"></label>
+      </div>
+      <div class="row row--wrap" id="presets"></div>
+    </section>
+
+    <section class="block">
+      <h2>🧱 3. Слои</h2>
+      <label class="check"><input type="checkbox" id="chk-hotspots" checked><span>🔥 термоточки (активное горение)</span></label>
+      <label class="check"><input type="checkbox" id="chk-contours" checked><span>🧱 контуры гари по степеням</span></label>
+      <label class="check"><input type="checkbox" id="chk-footprints"><span>📦 покрытие данными (границы чипов)</span></label>
+      <button id="btn-run" class="btn btn--primary" type="button">⛏️ Построить</button>
+      <p class="status" id="status"></p>
+    </section>
+
+    <section class="block block--report" id="report-block" hidden>
+      <h2>📜 Аналитическая справка</h2>
+      <div class="total">
+        <div class="total__value" id="total-ha">—</div>
+        <div class="total__label">га пройдено огнём</div>
+      </div>
+      <table class="sev" id="sev-table"></table>
+      <dl class="facts" id="facts"></dl>
+      <details class="method">
+        <summary><span class="marker">▸</span> Как считается площадь</summary>
+        <div id="method-body"></div>
+      </details>
+    </section>
+
+    <section class="block" id="export-block" hidden>
+      <h2>💾 Выгрузка</h2>
+      <div class="row row--wrap">
+        <a id="dl-contours" class="btn btn--ghost" download>💾 Контуры GeoJSON</a>
+        <a id="dl-hotspots" class="btn btn--ghost" download>💾 Термоточки GeoJSON</a>
+        <a id="dl-json" class="btn btn--ghost" download>💾 Справка JSON</a>
+        <a id="dl-csv" class="btn btn--ghost" download>💾 Справка CSV</a>
+      </div>
+      <p class="hint">Те же данные без интерфейса: <a href="/docs" target="_blank" rel="noopener">🔌 REST API</a></p>
+    </section>
+
+    <div class="achievement">
+      <div class="achievement__icon">🏆</div>
+      <div>
+        <div class="achievement__title">ДОСТИЖЕНИЕ ПОЛУЧЕНО</div>
+        <div class="achievement__body">
+          Проект <b>«НАБАТ»</b> · <b>КосмоХакатон 2026</b> · команда <b>«Майнкрафт Кульбит»</b><br>
+          Недозорова А. · Сабашнюк М. · Колпакова Д.
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="map-wrap">
+    <div id="map"></div>
+    <div class="legend">
+      <div class="legend__title">🎒 Степень поражения</div>
+      <div class="legend__item"><i style="background:#f6c445"></i>1 — слабое</div>
+      <div class="legend__item"><i style="background:#ee7b30"></i>2 — умеренное</div>
+      <div class="legend__item"><i style="background:#9d1414"></i>3 — сильное</div>
+      <div class="legend__item"><i class="dot"></i>термоточка</div>
+    </div>
+    <div id="draw-hint" class="draw-hint" hidden>✏️ Протяните рамку по карте</div>
+  </main>
+</div>
+<script src="/static/vendor/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+numpy
+pandas
+scipy
+matplotlib
+rasterio
+tifffile
+scikit-learn
+geopandas
+nbformat
+ipykernel
+nbclient
+kagglehub
+tqdm
+
+# обязательны и для обучения, и для inference.py.
+# lightgbm — модуль AF (ансамбль) и базовая модель BS (попиксельная).
+# torch — пространственный уточнитель BS (BSRefiner) + импортируется на старте
+#   inference.py, поэтому нужен даже если уточнитель не выиграл на валидации.
+# torchvision — оттуда берётся энкодер resnet34 для уточнителя. В Colab идёт
+#   в комплекте с torch, при чистой установке ставится отдельно.
+lightgbm
+torch
+torchvision
+
+# опционально — постобработка BS (SLIC-сглаживание, src/notebooks сами делают
+# graceful fallback, если пакета нет; в Colab обычно уже установлен)
+scikit-image
+
+# информационно-аналитический сервис (python -m service).
+# Геометрия, перепроецирование и векторизация масок сделаны на одном rasterio —
+# в нём уже есть GDAL и PROJ. Это осознанный отказ от shapely/pyproj/geopandas:
+# они чаще всего и ломают установку геостека на чужой машине, а сервис обязан
+# подниматься у проверяющих по одной команде.
+fastapi
+uvicorn
+
+# добавить по мере необходимости: fastapi, uvicorn, folium — когда дойдём до сервиса

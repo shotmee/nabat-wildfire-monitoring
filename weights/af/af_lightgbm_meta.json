@@ -1,0 +1,56 @@
+{
+  "feature_names": [
+    "I1",
+    "I2",
+    "I3",
+    "I4",
+    "I5",
+    "diff_I4_I5",
+    "z_I4_w9",
+    "z_diff_w9",
+    "z_I4_w21",
+    "z_diff_w21",
+    "bg_I4",
+    "bg_diff",
+    "z_I4_w41",
+    "z_diff_w41",
+    "z_I4_scale_ratio",
+    "solar_zenith",
+    "sensor_zenith",
+    "is_night",
+    "I1_I2_ratio",
+    "I2_I3_ratio",
+    "mean_refl_day",
+    "landcover",
+    "dem",
+    "t2m",
+    "rh2m",
+    "wind_speed",
+    "z_I4_x_cropland",
+    "z_diff_x_urban"
+  ],
+  "categorical_feature_idx": [
+    21
+  ],
+  "n_seeds": 3,
+  "focal_model_idx": 2,
+  "best_iterations": [
+    73,
+    87,
+    288
+  ],
+  "global_threshold": 0.75,
+  "per_landcover_thresholds": {
+    "10": 0.75,
+    "30": 0.75,
+    "40": 0.7999999999999999,
+    "50": 0.75,
+    "60": 0.95,
+    "80": 0.95,
+    "90": 0.7
+  },
+  "use_cnn_in_blend": false,
+  "f1_val": 0.9591107582373958,
+  "seed": 42,
+  "timestamp": "2026-09-19 12:29:06"
+}

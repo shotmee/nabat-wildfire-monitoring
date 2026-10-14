@@ -1,0 +1,34 @@
+data/
+*.csv
+!sample_submission.csv
+.ipynb_checkpoints/
+__pycache__/
+notebooks/checkpoints/
+
+# кэш аналитического сервиса — пересчитывается командой
+# `python -m service.precompute`, в репозитории не нужен
+service/cache/
+
+# архивы, случайно попавшие в weights/ при скачивании с Google Drive
+weights/**/*.zip
+
+# веса для inference.py ЗАЛИВАЮТСЯ в репозиторий (нужны для воспроизводимости
+# организаторами) - игнорируем .pt/.pth/.ckpt только вне weights/
+*.pt
+*.pth
+*.ckpt
+!weights/**/*.pt
+!weights/**/*.pth
+!weights/**/*.ckpt
+
+# ВАЖНО: правила ниже должны идти ПОСЛЕ отрицаний выше - в .gitignore
+# побеждает последнее совпавшее правило, и `!weights/**/*.pt` иначе
+# переоткрывает всё, что мы исключили раньше.
+#
+# Веса, которые текущая конфигурация НЕ использует, — 96 МБ мёртвого груза.
+# Файлы остаются на диске (вдруг понадобится сравнение), но в репозиторий
+# не едут: bs_strategy.json выбрал стратегию "refiner", а в
+# af_lightgbm_meta.json стоит "use_cnn_in_blend": false — inference.py их
+# даже не открывает.
+weights/bs/bs_unet_*
+weights/af/af_cnn_best.pt
